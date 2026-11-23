@@ -5,6 +5,10 @@ export type GalleryItem = {
   image_url: string;
   category: string;
   created_at?: string;
+  /** Optional extras used by media that ships with the site (not stored in Supabase). */
+  video_url?: string;
+  width?: number;
+  height?: number;
 };
 
 export type ContactInquiry = {

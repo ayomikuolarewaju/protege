@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ArrowUpRight, CheckCircle2, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
 
 import PageHero from '@/components/page-hero';
+import { media } from '@/lib/media';
 
 export default function ContactPage() {
   const phone = process.env.NEXT_PUBLIC_SCHOOL_PHONE || '+234 000 000 0000';
@@ -30,7 +31,7 @@ export default function ContactPage() {
           <a href={`tel:${phone.replace(/\s/g,'')}`} className={card}><span className={`${icon} bg-indigo/10 text-indigo`}><Phone size={20}/></span><span><span className="block text-sm text-ink/60">Call us</span><span className="mt-0.5 block font-semibold">{phone}</span></span></a>
           <a href={`mailto:${email}`} className={card}><span className={`${icon} bg-hibiscus/10 text-hibiscus`}><Mail size={20}/></span><span><span className="block text-sm text-ink/60">Email us</span><span className="mt-0.5 block break-all font-semibold">{email}</span></span></a>
           <a href={`https://wa.me/${wa}?text=${encodeURIComponent('Hello Protege Schools, I would like to make an enquiry.')}`} target="_blank" rel="noreferrer" className={card}><span className={`${icon} bg-[#dcfce7] text-[#16834a]`}><MessageCircle size={20}/></span><span><span className="block text-sm text-ink/60">WhatsApp</span><span className="mt-0.5 block font-semibold">Chat with our team <ArrowUpRight className="ml-1 inline" size={15}/></span></span></a>
-          <div className="adire-red flex gap-4 rounded-2xl p-5 text-white"><span className={`${icon} bg-white/15`}><MapPin size={20}/></span><span><span className="block text-sm text-white/70">Visit us</span><span className="mt-0.5 block font-semibold">Add your school address</span><span className="mt-1 block text-sm text-white/70">Please update with your full location.</span></span></div>
+          <div className="adire overflow-hidden rounded-2xl text-white"><img src={media.school_sign} alt="The Protege School sign at the school entrance" width={960} height={501} loading="lazy" className="h-40 w-full object-cover" /><div className="flex gap-4 p-5"><span className={`${icon} bg-white/15`}><MapPin size={20}/></span><span><span className="block text-sm text-white/70">Visit us</span><span className="mt-0.5 block font-semibold">Add your school address</span><span className="mt-1 block text-sm text-white/70">Please update with your full location.</span></span></div></div>
         </div>
       </aside>
       <div className="rounded-[2rem] bg-white p-6 shadow-soft sm:p-10">

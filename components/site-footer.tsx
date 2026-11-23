@@ -35,7 +35,7 @@ export default function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="container-shell flex flex-col justify-between gap-2 py-6 text-sm text-white/50 sm:flex-row">
           <span>© {new Date().getFullYear()} Protege Schools. All rights reserved.</span>
-          <span>Learn. Grow. Thrive.</span>
+          <span>Dream. Believe. Achieve.</span>
         </div>
       </div>
     </footer>

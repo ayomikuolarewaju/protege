@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, MessageCircle } from 'lucide-react';
-
-const img = (id: string, w = 1000) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+import { media } from '@/lib/media';
 
 const values = [
   { title: 'Curious by nature', text: 'We encourage children to ask questions, explore ideas, and discover how the world works.' },
@@ -14,15 +13,15 @@ const highlights = [
   { title: 'Room to flourish', text: 'We celebrate progress, individuality, and the small wins that build confidence.' },
 ];
 const glimpses = [
-  { src: img('photo-1509062522246-3755977927d7'), alt: 'Students learning together in a classroom', h: 'h-[340px] sm:h-[420px]', caption: 'Learning together' },
-  { src: img('photo-1502086108466-6d7a3b9a3c5a'), alt: 'A child creating and exploring', h: 'h-[400px] sm:h-[500px]', caption: 'Room to create' },
-  { src: img('photo-1472162072942-cd5147eb3902'), alt: 'Children playing and growing together', h: 'h-[340px] sm:h-[420px]', caption: 'Growing every day' },
+  { src: '/images/gallery/computer-lab.jpg', alt: 'Pupils working on laptops in the computer lab with their teachers', h: 'h-[340px] sm:h-[420px]', pos: '50% 50%', caption: 'Computer lab' },
+  { src: '/images/gallery/spelling-medals.jpg', alt: 'Pupils celebrating with medals beside the Spell Africa banner', h: 'h-[400px] sm:h-[500px]', pos: '50% 50%', caption: 'Spelling medals' },
+  { src: '/images/gallery/music-lesson.jpg', alt: 'Pupils learning to play a keyboard in a music lesson', h: 'h-[340px] sm:h-[420px]', pos: '58% 50%', caption: 'Music lesson' },
 ];
 
 export default function HomePage() {
   return <>
     {/* Hero */}
-    <section className="adire-red relative text-white">
+    <section className="adire relative text-white">
       <div className="container-shell grid items-center gap-12 pb-24 pt-14 lg:grid-cols-[1.05fr_.95fr] lg:pb-28 lg:pt-20">
         <div className="max-w-2xl">
           <h1 className="font-display text-[2.9rem] font-extrabold leading-[1.02] sm:text-6xl lg:text-[5rem]">Big dreams begin with little steps.</h1>
@@ -35,12 +34,12 @@ export default function HomePage() {
 
         <div className="relative mx-auto w-full max-w-[520px] pb-10 pl-10 sm:pl-16">
           <div className="rise arch overflow-hidden bg-white/10 shadow-soft">
-            <img src={img('photo-1503454537195-1dcabb73ffb9', 1200)} alt="A young child smiling in a bright learning environment" className="h-[430px] w-full object-cover sm:h-[560px]" />
+            <img src={media.hero} alt="Protege pupils in school polos posing in front of a vibrant painted mural" width={607} height={1080} fetchPriority="high" className="h-[430px] w-full object-cover object-top sm:h-[560px]" />
           </div>
           <div className="rise rise-2 arch absolute bottom-0 left-0 w-[40%] overflow-hidden border-[6px] border-indigo bg-indigo">
-            <img src={img('photo-1503676260728-1c00da094a0b', 600)} alt="A child looking at the world with wonder" className="h-[190px] w-full object-cover sm:h-[240px]" />
+            <img src={media.heroSmall} alt="Graduands in blue celebrating at the annual awards and graduation ceremony" width={960} height={1280} className="h-[190px] w-full object-cover object-[50%_30%] sm:h-[240px]" />
           </div>
-          <div className="settle absolute right-[-6px] top-10 grid h-28 w-28 place-items-center rounded-full bg-hibiscus text-center font-display text-[.95rem] font-bold leading-tight shadow-soft sm:right-[-22px] sm:h-32 sm:w-32">Learn.<br />Grow.<br />Thrive.</div>
+          <div className="settle absolute right-[-6px] top-10 grid h-28 w-28 place-items-center rounded-full bg-hibiscus text-center font-display text-[.95rem] font-bold leading-tight shadow-soft sm:right-[-22px] sm:h-32 sm:w-32">Dream.<br />Believe.<br />Achieve.</div>
         </div>
       </div>
       <div className="arch-edge absolute inset-x-0 bottom-0" aria-hidden="true" />
@@ -75,10 +74,24 @@ export default function HomePage() {
         <div className="mt-14 grid grid-cols-1 items-end gap-6 sm:grid-cols-3">
           {glimpses.map(g => (
             <figure key={g.caption}>
-              <div className="arch overflow-hidden bg-indigo/10"><img src={g.src} alt={g.alt} loading="lazy" className={`${g.h} w-full object-cover`} /></div>
+              <div className="arch overflow-hidden bg-indigo/10"><img src={g.src} alt={g.alt} loading="lazy" style={{ objectPosition: g.pos }} className={`${g.h} w-full object-cover`} /></div>
               <figcaption className="mt-4 font-display text-lg font-semibold">{g.caption}</figcaption>
             </figure>
           ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Video */}
+    <section className="section-pad">
+      <div className="container-shell grid items-center gap-12 md:grid-cols-[auto_1fr] md:gap-20">
+        <div className="arch mx-auto w-full max-w-[320px] overflow-hidden bg-ink shadow-soft">
+          <video src={media.lab_video} poster={media.lab_poster} controls playsInline preload="metadata" className="aspect-[9/16] w-full object-cover" aria-label="Pupils carrying out a science experiment in the laboratory" />
+        </div>
+        <div className="max-w-xl">
+          <h2 className="font-display text-3xl font-bold leading-tight sm:text-5xl">Learning you can see, touch and try.</h2>
+          <p className="mt-5 leading-8 text-ink/70">In the laboratory, pupils don’t just read about science. They pour, mix and measure for themselves, with teachers close by to guide every step.</p>
+          <Link href="/gallery" className="btn btn-ink mt-8">See more moments <ArrowRight size={17} /></Link>
         </div>
       </div>
     </section>
