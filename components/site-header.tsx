@@ -2,10 +2,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, ShieldCheck, X } from 'lucide-react';
 import Logo from './logo';
 
-const links = [{ href: '/', label: 'Home' }, { href: '/gallery', label: 'Our gallery' }, { href: '/contact', label: 'Contact us' }];
+const links = [{ href: '/', label: 'Home' }, { href: '/gallery', label: 'Our gallery' }, { href: '/blog', label: 'Blog' }, { href: '/contact', label: 'Contact us' }];
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -22,6 +22,9 @@ export default function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          <Link href="/admin" className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-4 py-2.5 text-sm font-bold text-ink transition hover:border-ink hover:bg-ink hover:text-white">
+            <ShieldCheck size={16} /> Admin
+          </Link>
           <Link href="/contact" className="btn btn-ink">Enquire now</Link>
         </nav>
         <button className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -33,6 +36,9 @@ export default function SiteHeader() {
           {links.map(link => (
             <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="block border-b border-ink/10 py-4 font-display text-2xl font-semibold">{link.label}</Link>
           ))}
+          <Link href="/admin" onClick={() => setOpen(false)} className="mt-5 flex w-full items-center justify-center gap-2 rounded-full border border-ink/15 px-5 py-4 font-bold text-ink">
+            <ShieldCheck size={18} /> Admin
+          </Link>
           <Link href="/contact" onClick={() => setOpen(false)} className="btn btn-primary mt-5 w-full">Enquire now</Link>
         </nav>
       )}

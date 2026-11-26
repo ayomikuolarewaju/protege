@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { media } from '@/lib/media';
+import { createClient } from '@/lib/supabase-server';
+import { DEFAULT_HOME_PAGE_CONTENT, type HomePageContent } from '@/lib/types';
 
 const values = [
   { title: 'Curious by nature', text: 'We encourage children to ask questions, explore ideas, and discover how the world works.' },
@@ -18,14 +20,28 @@ const glimpses = [
   { src: '/images/gallery/music-lesson.jpg', alt: 'Pupils learning to play a keyboard in a music lesson', h: 'h-[340px] sm:h-[420px]', pos: '58% 50%', caption: 'Music lesson' },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  let homeContent: HomePageContent = DEFAULT_HOME_PAGE_CONTENT;
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from('home_page_content')
+      .select('id,heading,tagline')
+      .eq('id', 1)
+      .maybeSingle();
+    if (error) throw error;
+    if (data) homeContent = data as HomePageContent;
+  } catch (error) {
+    console.error('Unable to load home page content:', error);
+  }
+
   return <>
     {/* Hero */}
     <section className="adire relative text-white">
       <div className="container-shell grid items-center gap-12 pb-24 pt-14 lg:grid-cols-[1.05fr_.95fr] lg:pb-28 lg:pt-20">
         <div className="max-w-2xl">
-          <h1 className="font-display text-[2.9rem] font-extrabold leading-[1.02] sm:text-6xl lg:text-[5rem]">Big dreams begin with little steps.</h1>
-          <p className="mt-7 max-w-lg text-lg leading-8 text-white/80">At Protege Schools, we nurture curious minds, kind hearts, and confident learners, one discovery at a time.</p>
+          <h1 className="font-display text-[2.9rem] font-extrabold leading-[1.02] sm:text-6xl lg:text-[5rem]">{homeContent.heading}</h1>
+          <p className="mt-7 max-w-lg text-lg leading-8 text-white/80">{homeContent.tagline}</p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link href="/contact" className="btn btn-primary">Enquire about admission <ArrowRight size={17} /></Link>
             <Link href="/gallery" className="btn btn-line">See life at Protege</Link>

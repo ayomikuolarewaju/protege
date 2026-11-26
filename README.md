@@ -6,9 +6,10 @@ An elegant, responsive school website starter built with **Next.js App Router, T
 
 - Landing page with school introduction, values, highlights, and calls to action.
 - Gallery page that reads published images from Supabase, with polished sample images as a fallback.
+- Public blog with administrator-managed posts and comments moderated before publication.
 - Contact page with a validated form, click-to-call phone link, WhatsApp chat link, and email link.
 - Contact API route that saves enquiries to Supabase and sends an email notification via Gmail SMTP/Nodemailer.
-- Admin login using Supabase Auth, an admin dashboard, gallery add/delete, enquiry review, and enquiry status updates.
+- Admin login using Supabase Auth, an admin dashboard, editable homepage heading/tagline, gallery add/delete, enquiry review, and enquiry status updates.
 - TypeScript strict mode and shared types for gallery items, enquiries, and contact form data.
 - Supabase SQL schema and row-level security (RLS) policies.
 
@@ -27,13 +28,17 @@ Open `http://localhost:3000`.
 ## 2. Configure Supabase
 
 1. Create a project at [Supabase](https://supabase.com/).
-2. Open **SQL Editor** and run `supabase/schema.sql`.
-3. In **Project Settings → API**, copy the project URL and anon/publishable key into `.env.local`.
+2. Open **SQL Editor** and run `supabase/schema.sql`. It creates the tables and seeds the current homepage heading/tagline and built-in gallery items. The seed can be rerun safely; existing homepage text and seeded gallery items are not overwritten.
+3. In **Project Settings → API**, copy the project URL and anon/publishable key into `.env.local`. If you already set up the website, rerun the updated `supabase/schema.sql` to add the new gallery metadata columns and seed the current website content.
 4. In **Authentication → Providers**, ensure Email/password sign-in is enabled. Keep public sign-ups disabled if only staff should use the admin area.
 5. In **Authentication → Users**, create the admin user. Copy the user's UUID and run the `insert into public.admins...` statement at the bottom of `supabase/schema.sql` with the real UUID.
 6. Sign in at `/admin/login`.
 
 The app checks the authenticated user and confirms the user exists in `public.admins`. RLS policies separately protect admin data operations. Never expose a Supabase service-role key in browser code.
+
+## Blog and comments
+
+Sign in at `/admin` to edit the homepage heading and tagline under **Home page**, manage gallery items, and review enquiries. Under **Blog posts**, create or edit posts. Posts stay as drafts until published. The public blog is available at `/blog`. Visitors can submit comments on each post; they remain hidden until an administrator approves them under **Blog comments**, where comments can also be edited or deleted. Blog content is plain text, so paragraphs and line breaks are preserved without rendering HTML.
 
 ## 3. Configure Gmail / Nodemailer
 

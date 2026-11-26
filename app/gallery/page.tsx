@@ -8,7 +8,7 @@ import { schoolMoments } from '@/lib/media';
 export const metadata: Metadata = { title: 'Our Gallery' };
 export default async function GalleryPage() {
   let items: GalleryItem[] = schoolMoments;
-  try { const supabase = await createClient(); const {data} = await supabase.from('gallery_items').select('id,title,description,image_url,category,created_at').order('created_at',{ascending:false}); if (data?.length) items = [...(data as GalleryItem[]), ...schoolMoments]; } catch { /* The school's own photos keep the page full before Supabase is set up. */ }
+  try { const supabase = await createClient(); const {data,error} = await supabase.from('gallery_items').select('id,title,description,image_url,category,video_url,width,height,created_at').order('created_at',{ascending:false}); if (error) throw error; if (data?.length) items = data as GalleryItem[]; } catch { /* The school's own photos keep the page full before Supabase is set up. */ }
   return <>
     <PageHero title="Little moments. Big memories." text="A glimpse into the learning, friendships, and discoveries that make every school day special." />
     <section className="pb-24 pt-8"><div className="container-shell">

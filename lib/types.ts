@@ -11,6 +11,15 @@ export type GalleryItem = {
   height?: number;
 };
 
+export const GALLERY_CATEGORIES = [
+  'Classroom',
+  'Competitions',
+  'Events',
+  'Activities',
+  'Community',
+  'Our school',
+] as const;
+
 export type ContactInquiry = {
   id: string;
   full_name: string;
@@ -28,4 +37,39 @@ export type ContactFormInput = {
   phone?: string;
   subject: string;
   message: string;
+};
+
+export type BlogPost = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  cover_image_url: string | null;
+  status: 'draft' | 'published';
+  created_at: string;
+  updated_at: string;
+};
+
+export type BlogComment = {
+  id: string;
+  post_id: string;
+  author_name: string;
+  author_email: string;
+  content: string;
+  status: 'pending' | 'approved';
+  created_at: string;
+  updated_at: string;
+};
+
+export type HomePageContent = {
+  id: number;
+  heading: string;
+  tagline: string;
+};
+
+export const DEFAULT_HOME_PAGE_CONTENT: HomePageContent = {
+  id: 1,
+  heading: 'Big dreams begin with little steps.',
+  tagline: 'At Protege Schools, we nurture curious minds, kind hearts, and confident learners, one discovery at a time.',
 };

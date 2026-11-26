@@ -28,7 +28,7 @@ export default function SiteFooter() {
             <a className="flex items-center gap-3 transition hover:text-white" href={`tel:${phone.replace(/\s/g, '')}`}><Phone size={17} className="text-hibiscus" />{phone}</a>
             <a className="flex items-center gap-3 break-all transition hover:text-white" href={`mailto:${email}`}><Mail size={17} className="shrink-0 text-hibiscus" />{email}</a>
             <a className="flex items-center gap-3 transition hover:text-white" href={`https://wa.me/${wa}`} target="_blank" rel="noreferrer"><MessageCircle size={17} className="text-hibiscus" />Chat with us on WhatsApp</a>
-            <p className="flex items-start gap-3"><MapPin size={17} className="mt-1 shrink-0 text-hibiscus" />Add your school address here</p>
+            <p className="flex items-start gap-3"><MapPin size={17} className="mt-1 shrink-0 text-hibiscus" />2, Kola Rewire, off Ailegun Road, Ejigbo</p>
           </div>
         </div>
       </div>
